@@ -1,3 +1,6 @@
+from cmath import isclose
+from math import sqrt
+
 def fact(n):
 	"""Computes the factorial of a natural number.
 	
@@ -22,7 +25,18 @@ def roots(a, b, c):
 	Post: Returns a tuple with zero, one or two elements corresponding
 		to the roots of the ax^2 + bx + c polynomial.
 	"""
-	pass
+	rho = b**2 - 4*a*c
+	
+	if rho < 0:
+		return ()
+
+	elif isclose(rho, 0, rel_tol=1e-9):
+		return (-b/(2*a),)
+	
+	else:
+		return ((-b+sqrt(rho))/2*a , (-b-sqrt(rho)/2*a))
+
+	
 
 def integrate(function, lower, upper):
 	"""Approximates the integral of a fonction between two bounds
@@ -41,5 +55,5 @@ def integrate(function, lower, upper):
 
 if __name__ == '__main__':
 	print(fact(5))
-	print(roots(1, 0, 1))
+	print(roots(1, -2, 1))
 	print(integrate('x ** 2 - 1', -1, 1))
